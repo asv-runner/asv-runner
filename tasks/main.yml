@@ -1,13 +1,11 @@
 ---
-- name: Setup packages
-  # TODO
+- name: Download repository
+  git:
+    repo: "{{ repo }}"
+    dest: asv-suite
 
-- name: Download suite
-  # TODO
+# - name: Run benchmarks
+#   # TODO
 
-- name: Run benchmarks
-  # TODO
-
-- name: Publish results
-  # TODO
-
+# - name: Publish benchmarks
+#   # TODO
