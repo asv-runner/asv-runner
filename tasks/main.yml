@@ -1,0 +1,13 @@
+---
+- name: Setup packages
+  # TODO
+
+- name: Download suite
+  # TODO
+
+- name: Run benchmarks
+  # TODO
+
+- name: Publish results
+  # TODO
+

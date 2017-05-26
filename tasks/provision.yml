@@ -1,0 +1,13 @@
+- hosts: localhost
+  connection: local
+  gather_facts: False
+
+  tasks:
+
+    - name: Provision a set of instances
+      ec2:
+        key_name: {{ key_name }}
+        instance_type: {{ instance_type }}
+        image: {{ image }}
+        wait: yes
+      register: ec2

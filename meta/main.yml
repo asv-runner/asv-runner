@@ -1,0 +1,28 @@
+---
+dependencies:
+  andrewrothstein.miniconda
+
+galaxy_info:
+  author: TomAugspurger
+  description: ASV runner
+  company: "Continuum Analytics"
+  license: "license BSD"
+  min_ansible_version: 2.2
+  platforms:
+    - name: Amazon
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - precise
+        - raring
+        - saucy
+        - trusty
+        - xenial
+  galaxy_tags:
+    - python
+
+allow_duplicates: yes
