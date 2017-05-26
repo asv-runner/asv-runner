@@ -1,11 +1,29 @@
 ---
+- name: Install git
+  become: yes
+  apt:
+    name: git
+    state: present
+    update_cache: true
+
 - name: Download repository
   git:
     repo: "{{ repo }}"
     dest: asv-suite
 
-# - name: Run benchmarks
-#   # TODO
+- name: Copy machine info
+  template:
+    src: asv-machine.json.j2
+    dest: /home/{{ ansible_user }}/.asv-machine.json
+
+- name: Run benchmarks
+  command: /home/{{ ansible_user }}/miniconda3/envs/asv/bin/asv run --machine="{{ machine.name }}"
+  args:
+    chdir: /home/{{ ansible_user }}/asv-suite/dask
+  environment:
+    PATH: "{{ ansible_env.PATH }}:/home/{{ ansible_user }}/miniconda3/bin"
+  tags:
+    - benchmark
 
 # - name: Publish benchmarks
 #   # TODO

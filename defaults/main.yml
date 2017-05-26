@@ -1,2 +1,9 @@
 instance_type: t2.micro
 repo: 'https://github.com/dask/dask-benchmarks'
+machine:
+  name: "asv-runner"
+  arch: "x86_64"
+  cpu: "Intel(R) Core(TM) i7-4980HQ CPU @ 2.80GHz"
+  os: "Linux 3.13.0-116-generic"
+  ram: "501692"
+  version: 1
