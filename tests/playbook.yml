@@ -9,4 +9,4 @@
         dependencies:
           - python=3.5
           - asv
-    - role: ../asv-runner
+    - role: ../../asv-runner
