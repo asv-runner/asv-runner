@@ -19,11 +19,17 @@
 - name: Run benchmarks
   command: /home/{{ ansible_user }}/miniconda3/envs/asv/bin/asv run --machine="{{ machine.name }}"
   args:
-    chdir: /home/{{ ansible_user }}/asv-suite/dask
+    chdir: /home/{{ ansible_user }}/asv-suite/{{ item }}
+  with_items:
+    "{{ repos }}"
   environment:
     PATH: "{{ ansible_env.PATH }}:/home/{{ ansible_user }}/miniconda3/bin"
   tags:
-    - benchmark
+    - benchmarks
 
 # - name: Publish benchmarks
-#   # TODO
+#   s3:
+#     bucket: "{{ s3_bucket }}"
+#     object: "{{ }}"
+#     src: "{{ }}"
+#     mode: put

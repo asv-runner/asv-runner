@@ -7,3 +7,6 @@ machine:
   os: "Linux 3.13.0-116-generic"
   ram: "501692"
   version: 1
+repos:
+  - dask
+  - distributed
