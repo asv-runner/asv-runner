@@ -1,15 +1,39 @@
 ---
-- name: Install git
+- name: Install system packages
   become: yes
   apt:
-    name: git
+    name:
+      - git
+      - python-pip
     state: present
     update_cache: true
+  tags:
+    - packages
+
+- name: Install boto
+  become: yes
+  pip:
+    name: boto
+  tags:
+    - aws
+    - s3
+
+- name: Ensure S3 bucket exists
+  become: no
+  s3_bucket:
+    name: "{{ s3_bucket }}"
+    tags: "{{ s3_tags }}"
+  tags:
+    - aws
+    - s3
+  environment:
+    AWS_ACCESS_KEY_ID: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
+    AWS_SECRET_ACCESS_KEY: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
 
 - name: Download repository
   git:
     repo: "{{ repo }}"
-    dest: asv-suite
+    dest: "{{ workdir }}"
 
 - name: Copy machine info
   template:
@@ -17,13 +41,13 @@
     dest: /home/{{ ansible_user }}/.asv-machine.json
 
 - name: Run benchmarks
-  command: /home/{{ ansible_user }}/miniconda3/envs/asv/bin/asv run --machine="{{ machine.name }}"
+  command: "{{ miniconda_dir }}/envs/asv/bin/asv run --machine={{ machine.name }}"
   args:
-    chdir: /home/{{ ansible_user }}/asv-suite/{{ item }}
+    chdir: "{{ workdir }}/{{ item }}"
   with_items:
-    "{{ repos }}"
+    "{{ benchmark_repos }}"
   environment:
-    PATH: "{{ ansible_env.PATH }}:/home/{{ ansible_user }}/miniconda3/bin"
+    PATH: "{{ ansible_env.PATH }}:{{ miniconda_dir }}/bin"
   tags:
     - benchmarks
 

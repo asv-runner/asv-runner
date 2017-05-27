@@ -1,5 +1,7 @@
 instance_type: t2.micro
 repo: 'https://github.com/dask/dask-benchmarks'
+workdir: "/home/{{ ansible_user }}/asv-suite"
+miniconda_dir: "/home/{{ ansible_user }}/miniconda3"
 machine:
   name: "asv-runner"
   arch: "x86_64"
@@ -7,6 +9,14 @@ machine:
   os: "Linux 3.13.0-116-generic"
   ram: "501692"
   version: 1
-repos:
+benchmark_repos:
+  # Use "." for a single benchmark repo in the root repo
   - dask
-  - distributed
+  # - distributed
+
+# S3
+s3_bucket: dask-benchmarks
+s3_tags:
+  billingProject: dask
+  owner: "Tom Augspurger"
+  contact: "Tom Augspurger"

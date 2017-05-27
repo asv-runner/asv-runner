@@ -9,4 +9,5 @@
         dependencies:
           - python=3.5
           - asv
+          - pip
     - role: ../../asv-runner
