@@ -1,0 +1,8 @@
+---
+- hosts: all
+  roles:
+    - role: ../../asv-runner
+      vars:
+        repo: https://github.com/pandas-dev/pandas
+        benchmark_roots:
+          - asv_bench

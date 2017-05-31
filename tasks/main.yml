@@ -53,3 +53,6 @@
     PATH: "{{ ansible_env.PATH }}:{{ miniconda_dir }}/bin"
   tags:
     - benchmarks
+
+- name: Publish Benchmarks
+  command: "{{ miniconda_dir }}/envs/asv/bin/asv gh-pages"
