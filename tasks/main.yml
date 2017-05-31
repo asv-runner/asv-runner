@@ -48,7 +48,7 @@
   args:
     chdir: "{{ workdir }}/{{ item }}"
   with_items:
-    "{{ benchmark_repos }}"
+    "{{ benchmark_roots }}"
   environment:
     PATH: "{{ ansible_env.PATH }}:{{ miniconda_dir }}/bin"
   tags:
