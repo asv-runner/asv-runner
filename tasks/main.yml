@@ -1,4 +1,16 @@
 ---
+- name: Setup Miniconda
+  include_role:
+    name: uchida.miniconda
+    vars:
+      name: asv
+      channels:
+        - conda-forge
+      dependencies:
+        - python=3.5
+        - asv
+        - pip
+
 - name: Install system packages
   become: yes
   apt:

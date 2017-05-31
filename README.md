@@ -1,6 +1,6 @@
 # asv-runner
 
-Setup a machine, run, and publish benchmarks
+Infrastructure to run and publish asv benchmarks.
 
 ## Usage
 
