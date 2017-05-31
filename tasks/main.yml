@@ -33,18 +33,6 @@
     - aws
     - s3
 
-- name: Ensure S3 bucket exists
-  become: no
-  s3_bucket:
-    name: "{{ s3_bucket }}"
-    tags: "{{ s3_tags }}"
-  tags:
-    - aws
-    - s3
-  environment:
-    AWS_ACCESS_KEY_ID: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
-    AWS_SECRET_ACCESS_KEY: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
-
 - name: Download repository
   git:
     repo: "{{ repo }}"
@@ -65,17 +53,3 @@
     PATH: "{{ ansible_env.PATH }}:{{ miniconda_dir }}/bin"
   tags:
     - benchmarks
-
-- name: Push results to storage
-  s3_sync:
-    bucket: "{{ s3_bucket }}"
-    file_root: "{{ workdir }}/{{ item }}/.asv/results"
-    key_prefix: "{{ item }}"
-  with_items: 
-    "{{ benchmark_repos }}"
-  environment:
-    AWS_ACCESS_KEY_ID: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
-    AWS_SECRET_ACCESS_KEY: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
-  tags:
-    - s3
-    - publish
