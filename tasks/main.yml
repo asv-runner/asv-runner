@@ -54,7 +54,7 @@
   tags:
     - benchmarks
 
-- name: Publish benchmarks
+- name: Push results to storage
   s3_sync:
     bucket: "{{ s3_bucket }}"
     file_root: "{{ workdir }}/{{ item }}/.asv/results"
