@@ -33,15 +33,48 @@
     - aws
     - s3
 
-- name: Download repository
-  git:
-    repo: "{{ repo }}"
-    dest: "{{ workdir }}"
-
 - name: Copy machine info
   template:
     src: asv-machine.json.j2
     dest: /home/{{ ansible_user }}/.asv-machine.json
+
+- name: Copy master runner
+  template:
+    src: benchmark_runner.sh
+    dest: /usr/local/bin/benchmark_runner
+    mode: 0755
+  become: yes
+  tags:
+    - runners
+
+- name: Ensure runners directory
+  file:
+    path: /home/{{ ansible_user }}/runners
+    state: directory
+  tags:
+    - runners
+
+- name: Copy runner script
+  template:
+    src: run.sh.j2
+    dest: /home/{{ ansible_user }}/runners/{{ run_name }}.sh
+    mode: 0755
+  tags:
+    - runners
+
+- name: Add cron job
+  cron:
+    name: "Run benchmarks"
+    minute: "0"
+    hour: "0"
+    job: "/usr/local/bin/benchmark_runner"
+  tags:
+    - runners
+
+- name: Download repository
+  git:
+    repo: "{{ repo }}"
+    dest: "{{ workdir }}"
 
 - name: Run benchmarks
   command: "{{ miniconda_dir }}/envs/asv/bin/asv run --machine={{ machine.name }}"
@@ -56,3 +89,4 @@
 
 - name: Publish Benchmarks
   command: "{{ miniconda_dir }}/envs/asv/bin/asv gh-pages"
+  when: "{{ publish }}"

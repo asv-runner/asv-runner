@@ -4,5 +4,6 @@
     - role: ../../asv-runner
       vars:
         repo: https://github.com/pandas-dev/pandas
+        asv_config: "asv_bench/asv.conf.json"
         benchmark_roots:
           - asv_bench

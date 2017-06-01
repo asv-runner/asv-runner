@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+export PATH={{ miniconda_dir }}/bin:$PATH
+
+echo "Starting for {{ run_name }}"
+source activate asv
+
+echo "Updating benchmark repository"
+cd {{ workdir }}
+git pull
+
+echo "Running benchmarks"
+asv --config={{ workdir }}/{{ asv_config }} run NEW
+asv --config={{ workdir }}/{{ asv_config }} run EXISTING --skip-existing-successful
+asv --config={{ workdir }}/{{ asv_config }} gh-pages
