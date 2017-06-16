@@ -1,0 +1,15 @@
+---
+- hosts: all
+  roles:
+    - role: ../../asv-runner
+  vars:
+    repositories:
+    - project: pandas
+      url: https://github.com/pandas-dev/pandas
+      asv_config: asv_bench/asv.conf.json
+    - project: astropy
+      url: https://github.com/astropy/astropy-benchmarks/
+      asv_config: asv.conf.json
+    - project: numpy
+      url: https://github.com/numpy/numpy
+      asv_config: benchmarks/asv.conf.json

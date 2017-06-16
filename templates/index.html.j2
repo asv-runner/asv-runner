@@ -1,0 +1,21 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Benchmark Collection</title>
+  <meta name="description" content="Benchmarks">
+
+  <link rel="stylesheet" href="css/styles.css?v=1.0">
+
+</head>
+
+<body>
+  <ul>
+    {% for item in repositories %}
+      <li><a href="{{ item.project }}">{{ item.project }}</a></li>
+    {% endfor %}
+  </ul>
+</body>
+</html>

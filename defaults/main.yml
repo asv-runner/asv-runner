@@ -18,10 +18,6 @@ repositories:
   - project: pandas
     url: https://github.com/pandas-dev/pandas
     asv_config: asv_bench/asv.conf.json
-    benchmark_roots:
-      - asv_bench
   - project: astropy
     url: https://github.com/astropy/astropy-benchmarks/
     asv_config: asv.conf.json
-    benchmark_roots:
-      - .

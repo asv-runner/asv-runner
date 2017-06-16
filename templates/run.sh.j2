@@ -10,6 +10,6 @@ cd /home/{{ ansible_user }}/{{ item.project }}/
 git pull
 
 echo "Running benchmarks"
-asv --config=/home/{{ ansible_user }}/{{ item.project }}/{{ item.asv_config }} run NEW
-asv --config=/home/{{ ansible_user }}/{{ item.project }}/{{ item.asv_config }} run EXISTING --skip-existing-successful
-asv --config=/home/{{ ansible_user }}/{{ item.project }}/{{ item.asv_config }} gh-pages
+asv --config=/home/{{ ansible_user }}/{{ item.project }}/{{ item.asv_config }} run --steps=100 NEW
+asv --config=/home/{{ ansible_user }}/{{ item.project }}/{{ item.asv_config }} run --steps=100 EXISTING --skip-existing-successful
+asv --config=/home/{{ ansible_user }}/{{ item.project }}/{{ item.asv_config }} gh-pages --no-push

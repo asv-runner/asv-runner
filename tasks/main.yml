@@ -35,6 +35,15 @@
   tags:
     - runners
 
+- name: Copy master publisher
+  template:
+    src: publish.sh.j2
+    dest: /usr/local/bin/publish
+    mode: 0755
+  become: yes
+  tags:
+    - publish
+
 - name: Ensure runners directory
   file:
     path: /home/{{ ansible_user }}/runners
@@ -65,3 +74,17 @@
     repo: "{{ item.url }}"
     dest: "/home/{{ ansible_user }}/{{ item.project }}"
   with_items: "{{ repositories }}"
+
+- name: Clone collections repository
+  git:
+    repo: https://github.com/tomaugspurger/asv-collection
+    dest: /home/{{ ansible_user }}/asv-collection
+  tags:
+    - publish
+
+- name: Update index.html
+  template:
+    src: index.html.j2
+    dest: /home/{{ ansible_user }}/asv-collection/index.html
+  tags:
+    - publish
