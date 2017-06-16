@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
-export PATH={{ miniconda_dir }}/bin:$PATH
+export PATH={{ miniconda_prefix }}/bin:$PATH
 
-echo "Starting for {{ run_name }}"
+echo "Starting for {{ item.project }}"
 source activate asv
 
 echo "Updating benchmark repository"
-cd {{ workdir }}
+cd /home/{{ ansible_user }}/{{ item.project }}/
 git pull
 
 echo "Running benchmarks"
-asv --config={{ workdir }}/{{ asv_config }} run NEW
-asv --config={{ workdir }}/{{ asv_config }} run EXISTING --skip-existing-successful
-asv --config={{ workdir }}/{{ asv_config }} gh-pages
+asv --config=/home/{{ ansible_user }}/{{ item.project }}/{{ item.asv_config }} run NEW
+asv --config=/home/{{ ansible_user }}/{{ item.project }}/{{ item.asv_config }} run EXISTING --skip-existing-successful
+asv --config=/home/{{ ansible_user }}/{{ item.project }}/{{ item.asv_config }} gh-pages

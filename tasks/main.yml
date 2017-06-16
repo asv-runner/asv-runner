@@ -1,16 +1,4 @@
 ---
-- name: Setup Miniconda
-  include_role:
-    name: uchida.miniconda
-    vars:
-      name: asv
-      channels:
-        - conda-forge
-      dependencies:
-        - python=3.5
-        - asv
-        - pip
-
 - name: Install system packages
   become: yes
   apt:
@@ -57,8 +45,9 @@
 - name: Copy runner script
   template:
     src: run.sh.j2
-    dest: /home/{{ ansible_user }}/runners/{{ run_name }}.sh
+    dest: /home/{{ ansible_user }}/runners/{{ item.project }}.sh
     mode: 0755
+  with_items: "{{ repositories }}"
   tags:
     - runners
 
@@ -71,22 +60,8 @@
   tags:
     - runners
 
-- name: Download repository
+- name: Download repositories
   git:
-    repo: "{{ repo }}"
-    dest: "{{ workdir }}"
-
-- name: Run benchmarks
-  command: "{{ miniconda_dir }}/envs/asv/bin/asv run --machine={{ machine.name }}"
-  args:
-    chdir: "{{ workdir }}/{{ item }}"
-  with_items:
-    "{{ benchmark_roots }}"
-  environment:
-    PATH: "{{ ansible_env.PATH }}:{{ miniconda_dir }}/bin"
-  tags:
-    - benchmarks
-
-- name: Publish Benchmarks
-  command: "{{ miniconda_dir }}/envs/asv/bin/asv gh-pages"
-  when: "{{ publish }}"
+    repo: "{{ item.url }}"
+    dest: "/home/{{ ansible_user }}/{{ item.project }}"
+  with_items: "{{ repositories }}"

@@ -1,9 +1,7 @@
+---
+# Machine information
 instance_type: t2.micro
-repo: 'https://github.com/dask/dask-benchmarks'
-run_name: "{{ repo|basename }}"
-workdir: "/home/{{ ansible_user }}/{{ run_name }}"
-miniconda_dir: "/home/{{ ansible_user }}/miniconda3"
-asv_config: "asv.conf.json"
+
 machine:
   name: "asv-runner"
   arch: "x86_64"
@@ -11,15 +9,19 @@ machine:
   os: "Linux 3.13.0-116-generic"
   ram: "501692"
   version: 1
-benchmark_roots:
-  # Use "." for a single benchmark repo in the root repo
-  - dask
-  # - distributed
 
-# S3
-s3_bucket: dask-benchmarks
-s3_tags:
-  billingProject: dask
-  owner: "Tom Augspurger"
-  contact: "Tom Augspurger"
-publish: True
+# System Packages
+miniconda_prefix: "/home/{{ ansible_user }}/miniconda"
+
+# Benchmark Repositories
+repositories:
+  - project: pandas
+    url: https://github.com/pandas-dev/pandas
+    asv_config: asv_bench/asv.conf.json
+    benchmark_roots:
+      - asv_bench
+  - project: astropy
+    url: https://github.com/astropy/astropy-benchmarks/
+    asv_config: asv.conf.json
+    benchmark_roots:
+      - .

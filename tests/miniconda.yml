@@ -1,0 +1,13 @@
+---
+- hosts: all
+  roles:
+    - role: uchida.miniconda
+      miniconda_prefix: "{{ ansible_env.HOME }}/miniconda"
+      miniconda_env:
+        name: asv
+        channels:
+          - conda-forge
+        dependencies:
+          - python=3.5
+          - asv
+          - pip
