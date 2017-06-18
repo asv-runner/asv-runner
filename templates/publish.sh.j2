@@ -3,7 +3,10 @@
 cd /home/{{ ansible_user }}/asv-collection
 
 {% for item in repositories %}
-git submodule update {{ item.project }} || git submodule add -b gh-pages file:///home/{{ ansible_user }}/../{{ item.project }}
+echo syncing {{ item.project }}
+git -C /home/{{ ansible_user }}/{{ item.project }} checkout gh-pages
+rsync -a /home/{{ ansible_user }}/{{ item.project }}/ {{ item.project }}/
+git -C /home/{{ ansible_user }}/{{ item.project }} checkout -
 {% endfor %}
 
 git add .
