@@ -6,6 +6,7 @@ cd /home/{{ ansible_user }}/asv-collection
 echo syncing {{ item.project }}
 git -C /home/{{ ansible_user }}/{{ item.project }} checkout gh-pages
 rsync -a /home/{{ ansible_user }}/{{ item.project }}/ {{ item.project }}/
+rm -rf {{ item.project }}/.git
 git -C /home/{{ ansible_user }}/{{ item.project }} checkout -
 {% endfor %}
 
