@@ -1,6 +1,6 @@
 ---
-dependencies:
-  - uchida.miniconda
+# dependencies:
+#  - uchida.miniconda
 
 galaxy_info:
   author: TomAugspurger

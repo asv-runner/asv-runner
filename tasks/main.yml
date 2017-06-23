@@ -77,7 +77,8 @@
 
 - name: Clone collections repository
   git:
-    repo: https://github.com/tomaugspurger/asv-collection
+    # use SSH for deploy key
+    repo: git@github.com:TomAugspurger/asv-collection.git
     dest: /home/{{ ansible_user }}/asv-collection
   tags:
     - publish
