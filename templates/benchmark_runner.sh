@@ -7,4 +7,4 @@ do
     echo "Finished ${f}"
 done
 
-/usr/local/bin/publish.sh
+/usr/local/bin/publish

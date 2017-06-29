@@ -2,15 +2,13 @@
 
 Infrastructure to run and publish asv benchmarks.
 
+This is used to manage benchmark machines run for scientific python projects.
+The hardware was purchased by the pandas project, with funds from donations
+made to [NUMFocus](https://www.numfocus.org/).
+
 ## Usage
 
 `ansible-galaxy install asv-runner`
-
-```
-export AWS_ACCESS_KEY_ID='AK123'
-export AWS_SECRET_ACCESS_KEY='abc123'
-```
-
 
 LICENSE: 3-clause BSD license.
 
@@ -19,4 +17,4 @@ LICENSE: 3-clause BSD license.
 `git clone git@github.com:TomAugspurger/asv-role`
 
 ---
-Copyright © 2014, Tom Augspurger
+Copyright © 2017, Tom Augspurger

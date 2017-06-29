@@ -65,7 +65,7 @@
     name: "Run benchmarks"
     minute: "0"
     hour: "0"
-    job: "/usr/local/bin/benchmark_runner"
+    job: "/usr/local/bin/benchmark_runner >> /var/log/runner.log 2>&1"
   tags:
     - runners
 
