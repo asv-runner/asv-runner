@@ -18,3 +18,9 @@ repositories:
   - project: pandas
     url: https://github.com/pandas-dev/pandas
     asv_config: asv_bench/asv.conf.json
+  - project: dask
+    url: https://github.com/dask/dask-benchmarks
+    asv_config: dask/asv.conf.json
+  - project: distributed
+    url: https://github.com/dask/dask-benchmarks
+    asv_config: distributed/asv.conf.json
