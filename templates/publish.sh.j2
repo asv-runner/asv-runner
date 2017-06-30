@@ -7,6 +7,7 @@ echo syncing {{ item.project }}
 git -C /home/{{ ansible_user }}/{{ item.project }} checkout gh-pages
 rsync -a /home/{{ ansible_user }}/{{ item.project }}/ {{ item.project }}/
 rm -rf {{ item.project }}/.git
+rm -rf {{ item.project }}/{{ item.project }}  # maybe remove the project repo
 git -C /home/{{ ansible_user }}/{{ item.project }} checkout -
 {% endfor %}
 
