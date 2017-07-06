@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# accept arguments for manually triggering a run
+range=${1:-"NEW"}
+steps=${2:-10}
 
 export PATH={{ miniconda_prefix }}/bin:$PATH
 
@@ -10,5 +13,5 @@ cd /home/{{ ansible_user }}/{{ item.project }}/
 git pull
 
 echo "Running benchmarks"
-asv --config=/home/{{ ansible_user }}/{{ item.project }}/{{ item.asv_config }} run --steps=10 NEW
+asv --config=/home/{{ ansible_user }}/{{ item.project }}/{{ item.asv_config }} run NEW
 asv --config=/home/{{ ansible_user }}/{{ item.project }}/{{ item.asv_config }} gh-pages --no-push
