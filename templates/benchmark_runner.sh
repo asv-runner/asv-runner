@@ -8,5 +8,5 @@ do
     echo $(date -u +"%Y-%m-%dT%H:%M:%SZ"),done,${f%.*} >> /home/{{ ansible_user }}/runners/log.csv
 done
 
-echo $(date -u +"%Y-%m-%dT%H:%M:%SZ"),publish,, >> /homme/{{ ansible_user }}/runners/log.csv
+echo $(date -u +"%Y-%m-%dT%H:%M:%SZ"),publish,, >> /home/{{ ansible_user }}/runners/log.csv
 /usr/local/bin/publish
