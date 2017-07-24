@@ -24,6 +24,3 @@ repositories:
   - project: distributed
     url: https://github.com/dask/dask-benchmarks
     asv_config: distributed/asv.conf.json
-  - project: xarray
-    url: https://github.com/pydata/xarray
-    asv_config: asv_bench/asv.conf.json
