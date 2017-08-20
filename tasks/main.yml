@@ -10,6 +10,8 @@
   tags:
     - packages
 
+# TODO: python2 -m pip install supervisor
+
 - name: Install system python packages
   become: yes
   pip:
@@ -60,15 +62,6 @@
   tags:
     - runners
 
-- name: Add cron job
-  cron:
-    name: "Run benchmarks"
-    minute: "0"
-    hour: "0"
-    job: "/usr/local/bin/benchmark_runner >> /var/log/runner.log 2>&1"
-  tags:
-    - runners
-
 - name: Download repositories
   git:
     repo: "{{ item.url }}"
@@ -89,3 +82,29 @@
     dest: /home/{{ ansible_user }}/asv-collection/index.html
   tags:
     - publish
+
+- name: Copy airflow script
+  template:
+    src: run_dag.py.j2
+    dest: /home/{{ ansible_user }}/airflow/dags/run_dag.py
+  tags:
+    - airflow
+
+- name: Copy airflow startup scripts
+  template:
+    src: "{{ item }}.j2"
+    dest: /home/{{ ansible_user }}/airflow/{{ item }}
+    mode: 0755
+  with_items:
+    - start-webserver
+    - start-scheduler
+  tags:
+    - airflow
+
+- name: Copy supervisor process
+  become: yes
+  template:
+    src: airflow-supervisord-conf.j2
+    dest: /etc/supervisor/conf.d/airflow.conf
+  tags:
+    airflow

@@ -1,0 +1,22 @@
+; Configuration for Airflow webserver and scheduler in Supervisor
+
+[program:airflow]
+command=/home/{{ ansible_user }}/airflow/start-webserver
+stopsignal=QUIT
+stopasgroup=true
+user={{ ansible_user }}
+stdout_logfile=/home/{{ ansible_user }}/airflow/logs/airflow-stdout.log
+stderr_logfile=/home/{{ ansible_user }}/airflow/logs/airflow-stderr.log
+environment=PATH="/home/{{ ansible_user }}/miniconda/bin:%(ENV_PATH)s",USER="{{ ansible_user }}",HOME="/home/{{ ansible_user }}/"
+
+
+[program:airflowscheduler]
+command=/home/{{ ansible_user }}/airflow/start-scheduler
+stopsignal=QUIT
+stopasgroup=true
+killasgroup=true
+user={{ ansible_user }}
+stdout_logfile=/home/{{ ansible_user }}/airflow/logs/airflow-scheduler-stdout.log
+stderr_logfile=/home/{{ ansible_user }}/airflow/logs/airflow-scheduler-stderr.log
+autorestart=true
+environment=PATH="/home/{{ ansible_user }}/miniconda/bin:%(ENV_PATH)s",USER="{{ ansible_user }}",HOME="/home/{{ ansible_user }}/"

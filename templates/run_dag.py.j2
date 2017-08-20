@@ -1,0 +1,34 @@
+import os
+import glob
+from airflow import DAG
+from airflow.operators.bash_operator import BashOperator
+from datetime import datetime, timedelta
+
+
+runner_files = glob.glob("/home/{{ ansible_user }}/runners/*.sh")
+runner_names = [os.path.basename(f).split(".")[0] for f in runner_files]
+
+default_args = {
+    'owner': 'airflow',
+    'depends_on_past': False,
+    'start_date': datetime(2017, 8, 16),
+    'email': ['airflow@airflow.com'],
+    'email_on_failure': False,
+    'email_on_retry': False,
+    'retries': 1,
+    'retry_delay': timedelta(minutes=5),
+}
+
+dag = DAG(
+    'Runner', default_args=default_args, schedule_interval=timedelta(1)
+)
+
+# t1, t2 and t3 are examples of tasks created by instantiating operators
+operators = [BashOperator(task_id="run_{}".format(name),
+                          bash_command=f + ' ', dag=dag)
+             for f, name in zip(runner_files, runner_names)]
+
+
+publish = BashOperator(task_id='publish',
+                       bash_command='/usr/local/bin/publish ', dag=dag)
+publish.set_upstream(operators)

@@ -9,6 +9,7 @@
         - python=3.5
         - asv
         - pip
+        - airflow
   roles:
     - role: uchida.miniconda
       miniconda_prefix: "{{ ansible_env.HOME }}/miniconda"
