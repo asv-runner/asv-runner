@@ -10,9 +10,6 @@
     - project: astropy
       url: https://github.com/astropy/astropy-benchmarks/
       asv_config: asv.conf.json
-    - project: numpy
-      url: https://github.com/numpy/numpy
-      asv_config: benchmarks/asv.conf.json
     - project: xarray
       url: https://github.com/pydata/xarray
       asv_config: asv_bench/asv.conf.json
