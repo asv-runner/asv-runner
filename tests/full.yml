@@ -22,3 +22,6 @@
     - project: pymc3
       url: https://github.com/pymc-devs/pymc3
       asv_config: benchmarks/asv.conf.json
+    - project: arrow
+      url: https://github.com/apache/arrow
+      asv_config: python/asv.conf.json
