@@ -25,3 +25,6 @@
     - project: arrow
       url: https://github.com/apache/arrow
       asv_config: python/asv.conf.json
+    - project: scikit-image
+      url: https://github.com/scikit-image/scikit-image
+      asv_config: asv.conf.json
