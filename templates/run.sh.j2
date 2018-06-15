@@ -15,4 +15,4 @@ git pull
 echo "Running benchmarks"
 # initial run, to ensure we have at least one in the results set
 asv --config=/home/{{ ansible_user }}/{{ item.project }}/{{ item.asv_config }} run HEAD~5..HEAD --skip-existing
-asv --config=/home/{{ ansible_user }}/{{ item.project }}/{{ item.asv_config }} gh-pages --no-push
+asv --config=/home/{{ ansible_user }}/{{ item.project }}/{{ item.asv_config }} gh-pages --no-push --rewrite
