@@ -7,24 +7,28 @@
     - project: pandas
       url: https://github.com/pandas-dev/pandas
       asv_config: asv_bench/asv.conf.json
-    - project: astropy
-      url: https://github.com/astropy/astropy-benchmarks/
-      asv_config: asv.conf.json
+      package: pandas
     - project: xarray
       url: https://github.com/pydata/xarray
       asv_config: asv_bench/asv.conf.json
+      package: xarray
     - project: dask
       url: https://github.com/dask/dask-benchmarks
       asv_config: dask/asv.conf.json
+      package: dask
     - project: distributed
       url: https://github.com/dask/dask-benchmarks
       asv_config: distributed/asv.conf.json
+      package: distributed
     - project: pymc3
       url: https://github.com/pymc-devs/pymc3
       asv_config: benchmarks/asv.conf.json
+      package: pymc3
     - project: arrow
       url: https://github.com/apache/arrow
       asv_config: python/asv.conf.json
+      package: arrow
     - project: scikit-image
       url: https://github.com/scikit-image/scikit-image
       asv_config: asv.conf.json
+      package: skimage
