@@ -7,7 +7,11 @@ echo syncing {{ item.project }}
 git -C /home/{{ ansible_user }}/{{ item.project }} checkout gh-pages
 rsync -a /home/{{ ansible_user }}/{{ item.project }}/ {{ item.project }}/
 rm -rf {{ item.project }}/.git
-rm -rf {{ item.project }}/{{ item.project }}  # maybe remove the project repo
+rm -rf {{ item.project }}/{{ item.package }}  # maybe remove the project repo
+rm -rf {{ item.project }}/build
+rm -rf {{item.project }}/{{ item.asv_config | dirname }}/env       # TODO: parse asv.conf.json
+rm -rf {{item.project }}/{{ item.asv_config | dirname }}/.asv/env  # TODO: parse asv.conf.json
+
 git -C /home/{{ ansible_user }}/{{ item.project }} checkout -
 {% endfor %}
 
