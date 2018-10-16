@@ -32,3 +32,7 @@
       url: https://github.com/scikit-image/scikit-image
       asv_config: asv.conf.json
       package: skimage
+    - project: joblib
+      url: https://github.com/pierreglaser/joblib_benchmarks
+      asv_config: asv.conf.json
+      package: joblib
