@@ -8,31 +8,39 @@
       url: https://github.com/pandas-dev/pandas
       asv_config: asv_bench/asv.conf.json
       package: pandas
+      results: asv_bench/html
     - project: xarray
       url: https://github.com/pydata/xarray
       asv_config: asv_bench/asv.conf.json
       package: xarray
+      results: asv_bench/.asv/html
     - project: dask
       url: https://github.com/dask/dask-benchmarks
       asv_config: dask/asv.conf.json
       package: dask
+      results: dask/.asv/html
     - project: distributed
       url: https://github.com/dask/dask-benchmarks
       asv_config: distributed/asv.conf.json
       package: distributed
+      results: distributed/.asv/html
     - project: pymc3
       url: https://github.com/pymc-devs/pymc3
       asv_config: benchmarks/asv.conf.json
       package: pymc3
+      results: benchmarks/html
     - project: arrow
       url: https://github.com/apache/arrow
       asv_config: python/asv.conf.json
       package: arrow
+      results: python/benchmarks/html
     - project: scikit-image
       url: https://github.com/scikit-image/scikit-image
       asv_config: asv.conf.json
       package: skimage
+      results: .asv/html
     - project: joblib
       url: https://github.com/pierreglaser/joblib_benchmarks
       asv_config: asv.conf.json
       package: joblib
+      results: html
