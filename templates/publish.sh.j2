@@ -5,7 +5,7 @@ cd /home/{{ ansible_user }}/asv-collection
 {% for item in repositories %}
 echo syncing {{ item.project }}
 
-cp -r /home/{{ ansible_user }}/{{ item.project }}/{{ item.results }} {{ item.project }}
+rsync -a --delete /home/{{ ansible_user }}/{{ item.project }}/{{ item.results }} {{ item.project }}
 {% endfor %}
 
 git config --global user.email "pandas.benchmarks@gmail.com"
