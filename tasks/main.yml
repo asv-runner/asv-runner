@@ -68,13 +68,14 @@
     dest: "/home/{{ ansible_user }}/{{ item.project }}"
   with_items: "{{ repositories }}"
 
-# - name: Clone collections repository
-#   git:
-#     # use SSH for deploy key
-#     repo: git@github.com:TomAugspurger/asv-collection.git
-#     dest: /home/{{ ansible_user }}/asv-collection
-#   tags:
-#     - publish
+- name: Clone collections repository
+  git:
+    # use SSH for deploy key
+    repo: git@github.com:asv-runner/asv-collection.git
+    dest: /home/{{ ansible_user }}/asv-collection
+  tags:
+    - publish
+    - collection
 
 - name: Update index.html
   template:
