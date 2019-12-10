@@ -19,11 +19,11 @@
       asv_config: dask/asv.conf.json
       package: dask
       results: dask/.asv/html/
-    # - project: distributed
-    #   url: https://github.com/dask/dask-benchmarks
-    #   asv_config: distributed/asv.conf.json
-    #   package: distributed
-    #   results: distributed/.asv/html
+    - project: distributed
+      url: https://github.com/dask/dask-benchmarks
+      asv_config: distributed/asv.conf.json
+      package: distributed
+      results: distributed/.asv/html
     - project: pymc3
       url: https://github.com/pymc-devs/pymc3
       asv_config: benchmarks/asv.conf.json
