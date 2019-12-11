@@ -2,6 +2,7 @@ import os
 import glob
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
+from airflow.utils.trigger_rule import TriggerRule
 from datetime import datetime, timedelta
 
 
@@ -30,5 +31,6 @@ operators = [BashOperator(task_id="run_{}".format(name),
 
 
 publish = BashOperator(task_id='publish',
-                       bash_command='/usr/local/bin/publish ', dag=dag)
+                       bash_command='/usr/local/bin/publish ', dag=dag,
+                       trigger_rule=TriggerRule.ALL_DONE)
 publish.set_upstream(operators)

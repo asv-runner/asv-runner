@@ -5,6 +5,7 @@
     name:
       - git
       - python-pip
+      - supervisor
     state: present
     update_cache: true
   tags:
@@ -12,16 +13,16 @@
 
 # TODO: python2 -m pip install supervisor
 
-- name: Install system python packages
-  become: yes
-  pip:
-    name:
-      - boto
-      - python-dateutil
-      - boto3
-  tags:
-    - aws
-    - s3
+# - name: Install system python packages
+#   become: yes
+#   pip:
+#     name:
+#       - boto
+#       - python-dateutil
+#       - boto3
+#   tags:
+#     - aws
+#     - s3
 
 - name: Copy machine info
   template:

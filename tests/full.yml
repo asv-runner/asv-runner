@@ -39,8 +39,8 @@
       asv_config: asv.conf.json
       package: skimage
       results: .asv/html/
-    - project: joblib
-      url: https://github.com/pierreglaser/joblib_benchmarks
-      asv_config: asv.conf.json
-      package: joblib
-      results: html/
+    # - project: joblib
+    #   url: https://github.com/pierreglaser/joblib_benchmarks
+    #   asv_config: asv.conf.json
+    #   package: joblib
+    #   results: html/
