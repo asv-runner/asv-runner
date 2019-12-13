@@ -11,7 +11,7 @@ machine:
   version: 1
 
 # System Packages
-miniconda_prefix: "/home/{{ ansible_user }}/miniconda"
+miniconda_prefix: "/home/{{ ansible_user }}/miniconda3"
 
 # Benchmark Repositories
 repositories:
